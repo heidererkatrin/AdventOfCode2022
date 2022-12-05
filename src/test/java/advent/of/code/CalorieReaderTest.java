@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalorieReaderTest {
 
-    public static final String CALORIES_FILE_PATH = "C:\\dev\\AdventOfCode\\src\\test\\resources\\Calories.csv";
+    public static final String CALORIES_FILE_PATH = "C:\\dev\\AdventOfCode2022\\src\\test\\resources\\Calories.csv";
     public static final int EXPECTED_HIGHEST_CALORIE_ELF = 69206;
     public static final int EXPECTED_HIGHEST_3_CALORIE_ELFS = 197400;
 
