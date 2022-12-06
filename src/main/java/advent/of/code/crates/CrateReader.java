@@ -56,4 +56,28 @@ public class CrateReader {
             e.printStackTrace();
         }
     }
+
+    public void readCratesInBundle(CrateGrid crateGrid) {
+        String line = "";
+        CrateOutputPrinter outputPrinter = new CrateOutputPrinter();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            int lineIndex = 0;
+            while ((line = br.readLine()) != null) {
+                lineIndex++;
+                if (lineIndex > 10) {
+                    crateGrid.getColumn(1);
+                    String[] splitMove = line.split("move ");
+                    String[] splitFrom = splitMove[1].split(" from ");
+                    String[] splitTo = splitFrom[1].split(" to ");
+                    crateGrid.moveCrateInBundle(Integer.parseInt(splitFrom[0]), Integer.parseInt(splitTo[0]), Integer.parseInt(splitTo[1]));
+                    outputPrinter.print(crateGrid);
+                    lineIndex++;
+                    System.out.println(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

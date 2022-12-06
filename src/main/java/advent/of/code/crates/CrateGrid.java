@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CrateGrid {
-    private HashMap<Integer, List<String>> map;
+    private final HashMap<Integer, List<String>> map;
 
     public CrateGrid() {
         this.map = new HashMap<>();
@@ -18,6 +18,18 @@ public class CrateGrid {
         for (int i = 0; i < quantityOfCratesMoved; i++) {
             destinationColumnList.add(0, initialColumnList.get(0));
             initialColumnList.remove(0);
+        }
+    }
+
+    public void moveCrateInBundle(int quantityOfCratesMoved, int initialColumn, int destinationColumn) {
+        List<String> initialColumnList = map.get(initialColumn);
+        List<String> destinationColumnList = map.get(destinationColumn);
+        List<String> subListToSplit = initialColumnList.subList(0, quantityOfCratesMoved );
+
+        destinationColumnList.addAll(0, subListToSplit);
+
+        if (quantityOfCratesMoved > 0) {
+            initialColumnList.subList(0, quantityOfCratesMoved).clear();
         }
     }
 
