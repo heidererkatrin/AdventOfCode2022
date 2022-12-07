@@ -21,7 +21,7 @@ public class RockPaperScissorsCsvReader {
         int lineNumber=0;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 lineNumber++;
                 Draw opponentDraw = Draw.getByOpponentCode(line.substring(0, 1));
                 Draw myDraw = Draw.getByMyCode(line.substring(2, 3));
