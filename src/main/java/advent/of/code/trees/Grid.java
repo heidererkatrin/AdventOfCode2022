@@ -15,7 +15,22 @@ public class Grid {
     }
 
     public void addTree(int row, int column, int height) {
-        trees[row][column] = new Tree(height);
+        trees[row][column] = new Tree(height, row, column);
+    }
+
+    public int calculateHighestAllScenticScores() {
+        int highestScenticView = 0;
+        for (int row = 0; row < gridRows; row++) {
+            for (int column = 0; column < girdColumns; column++) {
+                int score = calculateSingleScenticScore(row, column);
+                if (score > highestScenticView) {
+                    highestScenticView = score;
+                }
+                System.out.print("[" + score + "]");
+            }
+            System.out.println();
+        }
+        return highestScenticView;
     }
 
     public int calculateVisibleTrees() {
@@ -33,13 +48,10 @@ public class Grid {
 
     public boolean calculateSingleTree(int row, int column) {
         Tree tree = trees[row][column];
-        if (isCorner(row, column)) {
-            tree.setVisible(true);
+        tree.setVisible(isCornerTree(row, column));
+        for (DIRECTION direction : DIRECTION.values()) {
+            tree.setVisible(compareTrees(tree, findTreesToCompare(direction, row, column)));
         }
-        tree.setVisible(compareTrees(tree, findTreesToCompare(DIRECTION.LEFT, row, column)));
-        tree.setVisible(compareTrees(tree, findTreesToCompare(DIRECTION.DOWN, row, column)));
-        tree.setVisible(compareTrees(tree, findTreesToCompare(DIRECTION.RIGHT, row, column)));
-        tree.setVisible(compareTrees(tree, findTreesToCompare(DIRECTION.UP, row, column)));
         return tree.isVisible();
     }
 
@@ -52,7 +64,7 @@ public class Grid {
                 }
             }
             case DOWN -> {
-                for (int index = row + 1; index < gridRows; index++) {
+                for (int index = gridRows - 1; index > row; index--) {
                     treesToCompare.add(trees[index][column]);
                 }
             }
@@ -73,7 +85,29 @@ public class Grid {
                 .findAny().isEmpty();
     }
 
-    private boolean isCorner(int row, int column) {
+    private boolean isCornerTree(int row, int column) {
         return row == 0 || row == gridRows - 1 || column == 0 || column == girdColumns - 1;
+    }
+
+    public int calculateSingleScenticScore(int row, int column) {
+        int scenticScore = 1;
+        for (DIRECTION direction : DIRECTION.values()) {
+            scenticScore *= getScenticScore(trees[row][column], findTreesToCompare(direction, row, column));
+        }
+        return scenticScore;
+    }
+
+    private int getScenticScore(Tree tree, ArrayList<Tree> treesToCompare) {
+        int scenticScore = 1;
+        for (int index = treesToCompare.size() - 1; index >= 0; index--) {
+            Tree neighborTree = treesToCompare.get(index);
+            if (tree.getHeight() > neighborTree.getHeight()
+                    && !isCornerTree(neighborTree.getRow(), neighborTree.getColumn())) {
+                scenticScore++;
+            } else {
+                break;
+            }
+        }
+        return scenticScore;
     }
 }
