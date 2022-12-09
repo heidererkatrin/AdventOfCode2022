@@ -24,14 +24,32 @@ public class FileStructureCsvReader {
             List<Directory> allDirectories = fileOrganizer.getAllDirectories();
             allDirectories
                     .forEach(fileOrganizer::calculateFileSize);
-            return allDirectories
-                    .stream()
-                    .filter(e -> e.getDirectorySize() <= 100000)
-                    .collect(Collectors.toList());
+            return allDirectories;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Directory> getFilesUnder100000(List<Directory> allDirectories){
+        return allDirectories
+                .stream()
+                .filter(e -> e.getDirectorySize() <= 100000)
+                .collect(Collectors.toList());
+    }
+
+    public int getDiretoryClostestTo(List<Directory> allDirectories, int closeToNumber){
+        int result = 100000000;
+       for (Directory dir : allDirectories){
+           int minus = dir.getDirectorySize() - closeToNumber;
+           if (minus > 0) {
+               if (minus < result) {
+                   result = minus;
+               }
+           }
+       }
+       return result;
     }
 
     //TODO remove, for tests

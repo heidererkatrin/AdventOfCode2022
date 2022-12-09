@@ -1,5 +1,6 @@
 package advent.of.code;
 
+import advent.of.code.filesystem.File;
 import advent.of.code.filesystem.FileOrganizer;
 import advent.of.code.filesystem.Directory;
 import advent.of.code.filesystem.FileStructureCsvReader;
@@ -40,10 +41,11 @@ public class FileSystemTest {
         fileOrganizer.executeCommand(directory, "7214296 k" );
         FileStructureCsvReader fileStructureCsvReader = new FileStructureCsvReader();
         List<Directory> directories = fileStructureCsvReader.calculateLists(fileOrganizer);
+        List<Directory> smallDirectories = fileStructureCsvReader.getFilesUnder100000(directories);
 
-        assertThat(directories).hasSize(2);
-        Directory directoryA = directories.stream().filter(e -> e.getDirectoryName().equals("a")).findFirst().orElseThrow();
-        Directory directoryE = directories.stream().filter(e -> e.getDirectoryName().equals("e")).findFirst().orElseThrow();
+        assertThat(smallDirectories).hasSize(2);
+        Directory directoryA = smallDirectories.stream().filter(e -> e.getDirectoryName().equals("a")).findFirst().orElseThrow();
+        Directory directoryE = smallDirectories.stream().filter(e -> e.getDirectoryName().equals("e")).findFirst().orElseThrow();
 
         assertThat(directoryA.getDirectorySize()).isEqualTo(94853);
         assertThat(directoryE.getDirectorySize()).isEqualTo(584);
@@ -54,6 +56,20 @@ public class FileSystemTest {
     public void readFileInput(){
         FileStructureCsvReader fileStructureCsvReader = new FileStructureCsvReader();
         List<Directory> directories = fileStructureCsvReader.readFileStructureCommand(FILE_INFORMATION_FILE_PATH);
-        assertThat(directories).isNotEmpty();
+        List<Directory> smallDirectories = fileStructureCsvReader.getFilesUnder100000(directories);
+        System.out.println(smallDirectories.size());
+        System.out.println(smallDirectories
+                .stream()
+                .mapToInt(Directory::getDirectorySize)
+                .sum());
+        assertThat(smallDirectories).isNotEmpty();
+    }
+
+    @Test
+    public void getFileCloseToNumber(){
+        FileStructureCsvReader fileStructureCsvReader = new FileStructureCsvReader();
+        List<Directory> directories = fileStructureCsvReader.readFileStructureCommand(FILE_INFORMATION_FILE_PATH);
+        int diretoryClostestTo = fileStructureCsvReader.getDiretoryClostestTo(directories, 8748071);
+        assertThat(diretoryClostestTo + 8748071).isEqualTo(9847279);
     }
 }
