@@ -33,6 +33,18 @@ public class Grid {
         return highestScenticView;
     }
 
+    public int calculateAllScenticScores() {
+        int highestScenticView = 0;
+        for (int row = 0; row < gridRows; row++) {
+            for (int column = 0; column < girdColumns; column++) {
+                int score = calculateSingleScenticScore(row, column);
+                System.out.print("[" + score + "]");
+            }
+            System.out.println();
+        }
+        return highestScenticView;
+    }
+
     public int calculateVisibleTrees() {
         int sum = 0;
         for (int row = 0; row < gridRows; row++) {
