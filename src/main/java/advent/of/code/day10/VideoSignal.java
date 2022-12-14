@@ -6,9 +6,10 @@ public class VideoSignal {
     public static final String NOOP = "noop";
 
     private final Cycle cycle;
+    private final Sprite sprite;
+
     private int xRegister = 1;
     private StringBuilder ctrRow = new StringBuilder();
-    private Sprite sprite;
 
 
     public VideoSignal(Sprite sprite) {
@@ -20,14 +21,12 @@ public class VideoSignal {
         if (input.equals(NOOP)) {
             cycle.increaseCycle();
             paintSprite();
-
         } else if (input.startsWith(ADDING)) {
-            String[] value = input.split(ADDING);
-            int positionsToMove = Integer.parseInt(value[1]);
-            for (int index = 0; index < CYCLE_DURATION; index++) {
+            int positionsToMove = Integer.parseInt(input.split(ADDING)[1]);
+            for (int iteration = 0; iteration < CYCLE_DURATION; iteration++) {
                 cycle.increaseCycle();
                 paintSprite();
-                if (index != 0){
+                if (iteration != 0){
                     this.xRegister += positionsToMove;
                     sprite.moveSpritePosition(positionsToMove);
                 }
@@ -36,12 +35,7 @@ public class VideoSignal {
     }
 
     private void paintSprite() {
-        if (sprite.isInSprite(cycle.getDayInCycle())){
-            ctrRow.append("#");
-        }
-        else{
-            ctrRow.append(".");
-        }
+        ctrRow.append(sprite.isInSprite(cycle.getDayInCycle()) ? "#" : ".");
         checkForMaxCycle();
     }
 
@@ -49,7 +43,7 @@ public class VideoSignal {
         if (ctrRow.length() == Cycle.MAX_CYCLE_LENGTH){
             System.out.println(ctrRow);
             ctrRow = new StringBuilder();
-            cycle.setCycleBack();
+            cycle.resetCycle();
         }
     }
 

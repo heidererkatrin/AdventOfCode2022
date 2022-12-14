@@ -12,7 +12,7 @@ public class Cycle {
         return dayInCycle;
     }
 
-    public void setCycleBack() {
+    public void resetCycle() {
         dayInCycle -= MAX_CYCLE_LENGTH;
     }
 }
