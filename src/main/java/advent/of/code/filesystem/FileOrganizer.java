@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileOrganizer {
-    private List<Directory> allDirectories = new ArrayList<>();
+    private final List<Directory> allDirectories = new ArrayList<>();
 
     public Directory executeCommand(Directory currentDirectory, String input) {
         if (input.startsWith("dir")) {

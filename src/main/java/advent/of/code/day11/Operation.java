@@ -1,50 +1,47 @@
 package advent.of.code.day11;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class Operation {
-    private Operator operator;
-    private Integer operand;
+    private final Operator operator;
+    private final Integer operand;
 
     public Operation(Operator operator, Integer operand) {
         this.operator = operator;
         this.operand = operand;
     }
 
-    public BigDecimal calculateWorryLevel(BigDecimal startingWorryLevel){
-        switch (operator){
+    public BigDecimal calculateWorryLevel(BigDecimal startingWorryLevel) {
+        switch (operator) {
             case ADD -> {
-                BigDecimal increasedWorryLevel;
-                if (operand == null){
-                    increasedWorryLevel = startingWorryLevel.add(startingWorryLevel);
-                }
-                else{
-                    increasedWorryLevel = startingWorryLevel.add(BigDecimal.valueOf(operand));
-                }
-                System.out.println("Worry level increases by " + operand + " to " + increasedWorryLevel);
-                return increasedWorryLevel;
+                return calculateAdd(startingWorryLevel);
             }
             case MULTIPLY -> {
-                BigDecimal increasedWorryLevel;
-                if (operand == null){
-                    increasedWorryLevel = startingWorryLevel.multiply(startingWorryLevel);
-                }
-                else{
-                    increasedWorryLevel = startingWorryLevel.multiply(BigDecimal.valueOf(operand));
-                }
-                System.out.println("Worry level is multiplied by " + operand + " to " + increasedWorryLevel);
-                return increasedWorryLevel;
+                return calculateMultiplay(startingWorryLevel);
             }
             default -> throw new IllegalStateException("Unexpected value: " + operator);
         }
     }
 
-    public Operator getOperator() {
-        return operator;
+    private BigDecimal calculateMultiplay(BigDecimal startingWorryLevel) {
+        BigDecimal increasedWorryLevel;
+        if (operand == null) {
+            increasedWorryLevel = startingWorryLevel.multiply(startingWorryLevel);
+        } else {
+            increasedWorryLevel = startingWorryLevel.multiply(BigDecimal.valueOf(operand));
+        }
+        System.out.println("Worry level is multiplied by " + operand + " to " + increasedWorryLevel);
+        return increasedWorryLevel;
     }
 
-    public int getOperand() {
-        return operand;
+    private BigDecimal calculateAdd(BigDecimal startingWorryLevel) {
+        BigDecimal increasedWorryLevel;
+        if (operand == null) {
+            increasedWorryLevel = startingWorryLevel.add(startingWorryLevel);
+        } else {
+            increasedWorryLevel = startingWorryLevel.add(BigDecimal.valueOf(operand));
+        }
+        System.out.println("Worry level increases by " + operand + " to " + increasedWorryLevel);
+        return increasedWorryLevel;
     }
 }

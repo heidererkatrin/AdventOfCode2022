@@ -22,7 +22,7 @@ public class BackPackTest {
     }
 
     @Test
-    public void priorityFirstItemShouldBe1() throws Exception {
+    public void priorityFirstItemShouldBe3() throws Exception {
         BackPackSorter backPackSorter = new BackPackSorter();
         assertThat(3).isEqualTo(backPackSorter.getSharedItem("ndlndntsFJntFvccLjjLrjBShcBBfc"));
     }

@@ -4,6 +4,7 @@ import advent.of.code.day11.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class Day11MonkeyTest {
         Monkey monkey3 = monkeyThrowCalculator.getMonkeyByID(3);
 
         Assertions.assertThat(monkey3.getItems()).hasSize(2);
-        Assertions.assertThat(monkey3.getItems().get(0).getWorryLevel()).isEqualTo(500);
-        Assertions.assertThat(monkey3.getItems().get(1).getWorryLevel()).isEqualTo(620);
+        Assertions.assertThat(monkey3.getItems().get(0).getWorryLevel()).isEqualTo(BigDecimal.valueOf(500));
+        Assertions.assertThat(monkey3.getItems().get(1).getWorryLevel()).isEqualTo(BigDecimal.valueOf(620));
     }
 
     @Test
@@ -92,7 +93,6 @@ public class Day11MonkeyTest {
 
         MonkeyThrowCalculator monkeyThrowCalculator = new MonkeyThrowCalculator();
         monkeyThrowCalculator.setMonkeys(Arrays.asList(monkey, monkey1, monkey2, monkey3, monkey4, monkey5, monkey6, monkey7));
-        monkeyThrowCalculator.disableStressRelieve();
 
         monkeyThrowCalculator.doMonkeyBusiness(20);
 

@@ -1,12 +1,10 @@
 package advent.of.code.day11;
 
-import advent.of.code.rockpaperscissor.Draw;
-
 public enum Operator {
     ADD("+"),
     MULTIPLY("*");
 
-    String code;
+    final String code;
 
     Operator(String code) {
         this.code = code;
