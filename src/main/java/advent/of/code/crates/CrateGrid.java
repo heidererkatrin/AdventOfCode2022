@@ -54,13 +54,13 @@ public class CrateGrid {
     }
 
     public void addInput(int columnIndex, String substring) {
-        if (!substring.isEmpty() && !substring.equals(" ")) {
-            if (map.containsKey(columnIndex)) {
-                List<String> strings = map.get(columnIndex);
-                strings.add(substring);
-            } else {
-                map.put(columnIndex, Stream.of(substring).collect(Collectors.toList()));
-            }
+        if (substring.isEmpty() || substring.equals(" ")) {
+            return;
+        }
+        if (map.containsKey(columnIndex)) {
+            map.get(columnIndex).add(substring);
+        } else {
+            map.put(columnIndex, Stream.of(substring).collect(Collectors.toList()));
         }
     }
 

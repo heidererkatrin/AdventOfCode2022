@@ -49,16 +49,16 @@ public class Grid {
         int sum = 0;
         for (int row = 0; row < gridRows; row++) {
             for (int column = 0; column < girdColumns; column++) {
-                boolean isVisible = calculateSingleTree(row, column);
-                sum = sum + (isVisible ? 1 : 0);
-                System.out.print("[" + (isVisible ? "V" : "H") + "]");
+                boolean isTreeVisible = calculateVisibilityOfSingleTree(row, column);
+                sum = sum + (isTreeVisible ? 1 : 0);
+                System.out.print("[" + (isTreeVisible ? "V" : "H") + "]");
             }
             System.out.println();
         }
         return sum;
     }
 
-    public boolean calculateSingleTree(int row, int column) {
+    public boolean calculateVisibilityOfSingleTree(int row, int column) {
         Tree tree = trees[row][column];
         tree.setVisible(isCornerTree(row, column));
         for (DIRECTION direction : DIRECTION.values()) {

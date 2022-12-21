@@ -1,11 +1,7 @@
 package advent.of.code.backpack;
 
-import advent.of.code.calories.ElfStorage;
-import advent.of.code.model.Elf;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class BackPackCsvReader {
     private final String filePath;

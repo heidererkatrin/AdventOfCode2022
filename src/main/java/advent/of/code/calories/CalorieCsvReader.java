@@ -1,7 +1,5 @@
 package advent.of.code.calories;
 
-import advent.of.code.model.Elf;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

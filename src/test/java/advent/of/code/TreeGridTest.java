@@ -22,10 +22,10 @@ public class TreeGridTest {
         GridCsvReader gridCsvReader = new GridCsvReader();
         Grid grid = gridCsvReader.readInput(TREE_GRID_FILE_PATH_SNIP);
 
-        assertThat(grid.calculateSingleTree(3,1)).isFalse();
-        assertThat(grid.calculateSingleTree(2,2)).isFalse();
-        assertThat(grid.calculateSingleTree(1,3)).isFalse();
-        assertThat(grid.calculateSingleTree(3,3)).isFalse();
+        assertThat(grid.calculateVisibilityOfSingleTree(3,1)).isFalse();
+        assertThat(grid.calculateVisibilityOfSingleTree(2,2)).isFalse();
+        assertThat(grid.calculateVisibilityOfSingleTree(1,3)).isFalse();
+        assertThat(grid.calculateVisibilityOfSingleTree(3,3)).isFalse();
 
         assertThat(grid.calculateVisibleTrees()).isEqualTo(21);
     }

@@ -1,4 +1,4 @@
-package advent.of.code.model;
+package advent.of.code.calories;
 
 public class Elf {
     private int totalCalories = 0;
