@@ -1,6 +1,6 @@
 package advent.of.code;
 
-import advent.of.code.rockpaperscissor.*;
+import advent.of.code.day2.*;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

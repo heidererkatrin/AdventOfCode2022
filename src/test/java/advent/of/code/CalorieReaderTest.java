@@ -1,8 +1,8 @@
 package advent.of.code;
 
-import advent.of.code.calories.CalorieCsvReader;
-import advent.of.code.calories.ElfStorage;
-import advent.of.code.model.Elf;
+import advent.of.code.day1.CalorieCsvReader;
+import advent.of.code.day1.ElfStorage;
+import advent.of.code.day1.model.Elf;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

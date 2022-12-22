@@ -1,4 +1,4 @@
-package advent.of.code.rockpaperscissor;
+package advent.of.code.day2;
 
 public enum Outcome {
     DRAW ("Y"),

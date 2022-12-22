@@ -1,4 +1,4 @@
-package advent.of.code.rockpaperscissor;
+package advent.of.code.day2;
 
 public class RockPaperScissors {
 
@@ -16,14 +16,10 @@ public class RockPaperScissors {
     }
 
     public Draw getDrawByOutcome(Draw opponentDraw, Outcome outcome) {
-        switch (outcome) {
-            case WIN:
-                return Draw.getByName(opponentDraw.getWinAgainst());
-            case LOSE:
-                return Draw.getLoosing(opponentDraw.getName(), opponentDraw.getWinAgainst());
-            case DRAW:
-                return opponentDraw;
-        }
-        return null;
+        return switch (outcome) {
+            case WIN -> Draw.getByName(opponentDraw.getWinAgainst());
+            case LOSE -> Draw.getLoosing(opponentDraw.getName(), opponentDraw.getWinAgainst());
+            case DRAW -> opponentDraw;
+        };
     }
 }

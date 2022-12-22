@@ -1,6 +1,6 @@
-package advent.of.code.calories;
+package advent.of.code.day1;
 
-import advent.of.code.rockpaperscissor.Draw;
+import advent.of.code.day2.Draw;
 
 public class Printer {
 

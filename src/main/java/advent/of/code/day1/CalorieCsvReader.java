@@ -1,6 +1,6 @@
-package advent.of.code.calories;
+package advent.of.code.day1;
 
-import advent.of.code.model.Elf;
+import advent.of.code.day1.model.Elf;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

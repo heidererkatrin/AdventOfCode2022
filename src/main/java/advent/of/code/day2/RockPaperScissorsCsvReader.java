@@ -1,6 +1,6 @@
-package advent.of.code.rockpaperscissor;
+package advent.of.code.day2;
 
-import advent.of.code.calories.Printer;
+import advent.of.code.day1.Printer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
