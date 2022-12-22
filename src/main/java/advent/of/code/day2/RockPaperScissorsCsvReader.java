@@ -19,7 +19,7 @@ public class RockPaperScissorsCsvReader {
         RockPaperScissors rockPaperScissors = new RockPaperScissors();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((br.readLine()) != null) {
+            while ((line = br.readLine()) != null && line.length() > 0) {
                 Draw opponentDraw = Draw.getByOpponentCode(line.substring(0, 1));
                 Draw myDraw = Draw.getByMyCode(line.substring(2, 3));
                 score += rockPaperScissors.runGame(opponentDraw, myDraw);
