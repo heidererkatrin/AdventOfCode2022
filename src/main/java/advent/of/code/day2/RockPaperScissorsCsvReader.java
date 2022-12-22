@@ -17,20 +17,12 @@ public class RockPaperScissorsCsvReader {
         String line = "";
         int score = 0;
         RockPaperScissors rockPaperScissors = new RockPaperScissors();
-        Printer printer = new Printer();
-        int lineNumber=0;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while ((br.readLine()) != null) {
-                lineNumber++;
                 Draw opponentDraw = Draw.getByOpponentCode(line.substring(0, 1));
                 Draw myDraw = Draw.getByMyCode(line.substring(2, 3));
-                if (opponentDraw == null || myDraw == null) {
-                    throw new IllegalStateException("Unexpected value: " + opponentDraw + " " + myDraw);
-                }
-                int individualScore= rockPaperScissors.runGame(opponentDraw, myDraw);
-                score +=individualScore;
-                printer.printDraws(opponentDraw, myDraw, individualScore, score, lineNumber);
+                score += rockPaperScissors.runGame(opponentDraw, myDraw);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,21 +35,13 @@ public class RockPaperScissorsCsvReader {
         String line = "";
         int score = 0;
         RockPaperScissors rockPaperScissors = new RockPaperScissors();
-        Printer printer = new Printer();
-        int lineNumber=0;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while ((line = br.readLine()) != null) {
-                lineNumber++;
                 Draw opponentDraw = Draw.getByOpponentCode(line.substring(0, 1));
                 Outcome outcome = Outcome.getByCode(line.substring(2, 3));
-                if (opponentDraw == null || outcome == null) {
-                    throw new IllegalStateException("Unexpected value: " + opponentDraw + " " + outcome);
-                }
                 Draw myDraw = rockPaperScissors.getDrawByOutcome(opponentDraw, outcome);
-                int individualScore= rockPaperScissors.runGame(opponentDraw, myDraw);
-                score +=individualScore;
-                printer.printDraws(opponentDraw, myDraw, individualScore, score, lineNumber);
+                score += rockPaperScissors.runGame(opponentDraw, myDraw);
             }
         } catch (IOException e) {
             e.printStackTrace();
