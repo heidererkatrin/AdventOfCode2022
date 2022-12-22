@@ -1,5 +1,6 @@
 package advent.of.code;
 
+import advent.of.code.day10.Cycle;
 import advent.of.code.day10.Sprite;
 import advent.of.code.day10.VideoSignal;
 import advent.of.code.day10.VideoSignalReader;
@@ -8,12 +9,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Day10VideoSignalTest {
-    public static final String TREE_GRID_FILE_PATH = "C:\\dev\\AdventOfCode2022\\src\\test\\resources\\TreeTest.csv";
     public static final String VIDEO_SIGNAL_FILE_PATH_SNIP = "C:\\dev\\AdventOfCode2022\\src\\test\\resources\\Day10VideoSignalSnippet.csv";
 
     @Test
     public void startVideoSignal(){
-        VideoSignal videoSignal = new VideoSignal(new Sprite());
+        VideoSignal videoSignal = new VideoSignal(new Sprite(), new Cycle());
 
         videoSignal.readInput("noop");
         videoSignal.readInput("addx 3");
@@ -25,7 +25,7 @@ public class Day10VideoSignalTest {
 
     @Test
     public void startVideoSignalForFirst20Cycles(){
-        VideoSignal videoSignal = new VideoSignal(new Sprite());
+        VideoSignal videoSignal = new VideoSignal(new Sprite(), new Cycle());
 
         videoSignal.readInput("addx 15");
         videoSignal.readInput("addx -11");
@@ -60,6 +60,6 @@ public class Day10VideoSignalTest {
     @Test
     public void startVideoSignalReadCsvLineByLine(){
         VideoSignalReader videoSignalReader = new VideoSignalReader(VIDEO_SIGNAL_FILE_PATH_SNIP);
-        VideoSignal videoSignal = videoSignalReader.readVideoSignal();
+        videoSignalReader.readVideoSignal();
     }
 }

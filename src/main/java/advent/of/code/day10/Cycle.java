@@ -2,7 +2,7 @@ package advent.of.code.day10;
 
 public class Cycle {
     public static final int MAX_CYCLE_LENGTH = 40;
-    int dayInCycle;
+    private int dayInCycle;
 
     public void increaseCycle() {
         dayInCycle += 1;

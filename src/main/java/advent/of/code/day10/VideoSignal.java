@@ -8,30 +8,37 @@ public class VideoSignal {
     private final Cycle cycle;
     private final Sprite sprite;
 
-    private int xRegister = 1;
     private StringBuilder ctrRow = new StringBuilder();
+    private int xRegister = 1;
 
 
-    public VideoSignal(Sprite sprite) {
+    public VideoSignal(Sprite sprite, Cycle cycle) {
         this.sprite = sprite;
-        cycle = new Cycle();
+        this.cycle = cycle;
     }
 
     public void readInput(String input) {
         if (input.equals(NOOP)) {
-            cycle.increaseCycle();
-            paintSprite();
+            processNextDay();
         } else if (input.startsWith(ADDING)) {
-            int positionsToMove = Integer.parseInt(input.split(ADDING)[1]);
-            for (int iteration = 0; iteration < CYCLE_DURATION; iteration++) {
-                cycle.increaseCycle();
-                paintSprite();
-                if (iteration != 0){
-                    this.xRegister += positionsToMove;
-                    sprite.moveSpritePosition(positionsToMove);
-                }
+            processAdd(input);
+        }
+    }
+
+    private void processAdd(String input) {
+        int positionsToMove = Integer.parseInt(input.split(ADDING)[1]);
+        for (int day = 0; day < CYCLE_DURATION; day++) {
+            processNextDay();
+            if (day != 0){
+                this.xRegister += positionsToMove;
+                sprite.moveSpritePosition(positionsToMove);
             }
         }
+    }
+
+    private void processNextDay() {
+        cycle.increaseCycle();
+        paintSprite();
     }
 
     private void paintSprite() {
@@ -40,7 +47,7 @@ public class VideoSignal {
     }
 
     private void checkForMaxCycle() {
-        if (ctrRow.length() == Cycle.MAX_CYCLE_LENGTH){
+        if (ctrRow.length() == Cycle.MAX_CYCLE_LENGTH) {
             System.out.println(ctrRow);
             ctrRow = new StringBuilder();
             cycle.resetCycle();

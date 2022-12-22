@@ -14,7 +14,7 @@ public class VideoSignalReader {
     public VideoSignal readVideoSignal(int startCycle, int numOfCycles) {
         String line = "";
         int lineNumber = 0;
-        VideoSignal videoSignal = new VideoSignal(new Sprite());
+        VideoSignal videoSignal = new VideoSignal(new Sprite(), new Cycle());
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while ((line = br.readLine()) != null) {
