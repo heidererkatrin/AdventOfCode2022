@@ -15,40 +15,38 @@ public class Monkey {
         this.monkeyIndex = monkeyIndex;
     }
 
-    public int getMonkeyIndex() {
-        return monkeyIndex;
-    }
-
-    public void addItemWithWorryLevel(Item itemWorryLevel){
-        items.add(itemWorryLevel);
-    }
-
-    public List<Item> getItems() {
-        return items;
+    public Monkey(int monkeyIndex, MonkeyDecision monkeyDecision, Operation currentOperation) {
+        this.monkeyIndex = monkeyIndex;
+        this.monkeyDecision = monkeyDecision;
+        this.currentOperation = currentOperation;
     }
 
     public void clearItemList() {
         items.clear();
     }
 
-    public void setOperation(Operation operation) {
-        this.currentOperation = operation;
+    public void increaseInspectionCounter(){
+        monkeyInspectsItem += 1;
+    }
+
+    public void addItemWithWorryLevel(Item itemWorryLevel){
+        items.add(itemWorryLevel);
+    }
+
+    public int getMonkeyIndex() {
+        return monkeyIndex;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 
     public Operation getCurrentOperation() {
         return currentOperation;
     }
 
-    public void setMonkeyDecision(MonkeyDecision monkeyDecision) {
-        this.monkeyDecision = monkeyDecision;
-    }
-
     public MonkeyDecision getMonkeyDecision() {
         return monkeyDecision;
-    }
-
-    public void increaseInspectionCounter(){
-        monkeyInspectsItem += 1;
     }
 
     public int getMonkeyInspectsItem() {

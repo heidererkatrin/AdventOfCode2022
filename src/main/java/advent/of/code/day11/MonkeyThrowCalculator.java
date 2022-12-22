@@ -10,15 +10,12 @@ public class MonkeyThrowCalculator {
     private boolean decreaseBoringLevel = true;
 
     public void doMonkeyBusiness(int amountRounds) {
-        for (int start = 1; start<=amountRounds; start++){
+        for (int start = 1; start <= amountRounds; start++) {
             doMonkeyBusiness();
         }
     }
-
-    public void doMonkeyBusiness() {
-        for (Monkey monkey : monkeyMap.values()) {
-            runThrowingCalculation(monkey);
-        }
+    private void doMonkeyBusiness() {
+        monkeyMap.values().forEach(this::runThrowingCalculation);
     }
 
     public void runThrowingCalculation(Monkey monkey) {
@@ -26,15 +23,14 @@ public class MonkeyThrowCalculator {
         for (Item item : monkey.getItems()) {
             System.out.println("Monkey inspects an item with a worry level of " + item.getWorryLevel());
             BigDecimal increasedWorryLevel = monkey.getCurrentOperation().calculateWorryLevel(item.getWorryLevel());
-            BigDecimal decreaseBoringWorryLevel = increasedWorryLevel;
             if (decreaseBoringLevel) {
-                decreaseBoringWorryLevel =increasedWorryLevel
+                increasedWorryLevel = increasedWorryLevel
                         .divide(new BigDecimal(3), 0, RoundingMode.DOWN);
-                System.out.println("Monkey gets bored with item. Worry level is divided by 3 to " + decreaseBoringWorryLevel);
+                System.out.println("Monkey gets bored with item. Worry level is divided by 3 to " + increasedWorryLevel);
             }
 
-            int nextMonkey = monkey.getMonkeyDecision().calculateNextMonkey(decreaseBoringWorryLevel.intValue());
-            monkeyMap.get(nextMonkey).addItemWithWorryLevel(new Item(decreaseBoringWorryLevel.intValue()));
+            int nextMonkey = monkey.getMonkeyDecision().calculateNextMonkey(increasedWorryLevel.intValue());
+            getMonkeyByID(nextMonkey).addItemWithWorryLevel(new Item(increasedWorryLevel.intValue()));
 
             monkey.increaseInspectionCounter();
             System.out.println("----------------------------");
@@ -42,7 +38,7 @@ public class MonkeyThrowCalculator {
         monkey.clearItemList();
     }
 
-    public void disableStressRelieve(){
+    public void disableStressRelieve() {
         decreaseBoringLevel = false;
     }
 

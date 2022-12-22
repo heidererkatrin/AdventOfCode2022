@@ -19,11 +19,9 @@ public class Day11MonkeyTest {
 
     @Test
     void oneRoundMonkeyHasSpecificWorryLevels() {
-        Monkey monkey = new Monkey(1);
+        Monkey monkey = new Monkey(1, new MonkeyDecision(23, 2, 3),new Operation(Operator.MULTIPLY, 19));
         monkey.addItemWithWorryLevel(new Item(79));
         monkey.addItemWithWorryLevel(new Item(98));
-        monkey.setOperation(new Operation(Operator.MULTIPLY, 19));
-        monkey.setMonkeyDecision(new MonkeyDecision(23, 2, 3));
 
         MonkeyThrowCalculator monkeyThrowCalculator = new MonkeyThrowCalculator();
         monkeyThrowCalculator.setMonkeys(Arrays.asList(monkey, new Monkey(2), new Monkey(3)));
@@ -46,7 +44,7 @@ public class Day11MonkeyTest {
         MonkeyThrowCalculator monkeyThrowCalculator = new MonkeyThrowCalculator();
         monkeyThrowCalculator.setMonkeys(Arrays.asList(monkey, monkey1, monkey2, monkey3));
 
-        monkeyThrowCalculator.doMonkeyBusiness();
+        monkeyThrowCalculator.doMonkeyBusiness(1);
 
         Assertions.assertThat(monkey.getItems()).hasSize(4);
         Assertions.assertThat(monkey1.getItems()).hasSize(6);
@@ -161,9 +159,7 @@ public class Day11MonkeyTest {
 
     private static class MonkeyBuilder extends Monkey {
         public MonkeyBuilder(int monkeyIndex, List<Item> items, Operator operator, Integer operand, int divisibleBy, int nextTrueMonkey, int nextFalseMonkey) {
-            super(monkeyIndex);
-            setOperation(new Operation(operator, operand));
-            setMonkeyDecision(new MonkeyDecision(divisibleBy, nextTrueMonkey, nextFalseMonkey));
+            super(monkeyIndex,new MonkeyDecision(divisibleBy, nextTrueMonkey, nextFalseMonkey), new Operation(operator, operand));
             items.forEach(this::addItemWithWorryLevel);
         }
     }

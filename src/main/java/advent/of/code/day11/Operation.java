@@ -17,13 +17,13 @@ public class Operation {
                 return calculateAdd(startingWorryLevel);
             }
             case MULTIPLY -> {
-                return calculateMultiplay(startingWorryLevel);
+                return calculateMultiply(startingWorryLevel);
             }
             default -> throw new IllegalStateException("Unexpected value: " + operator);
         }
     }
 
-    private BigDecimal calculateMultiplay(BigDecimal startingWorryLevel) {
+    private BigDecimal calculateMultiply(BigDecimal startingWorryLevel) {
         BigDecimal increasedWorryLevel;
         if (operand == null) {
             increasedWorryLevel = startingWorryLevel.multiply(startingWorryLevel);
