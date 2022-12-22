@@ -40,7 +40,7 @@ public class Day10VideoSignalTest {
         videoSignal.readInput("addx -1");
 
         String ctrRow = videoSignal.getCtrRow();
-        assertThat(ctrRow).isEqualTo("##..##..##..##..##..");
+        assertThat(ctrRow).isEqualTo("##..##..##..##..##..#");
         assertThat(videoSignal.getCycle()).isEqualTo(21);
         assertThat(videoSignal.getXRegister()).isEqualTo(20);
 
@@ -51,8 +51,6 @@ public class Day10VideoSignalTest {
         VideoSignalReader videoSignalReader = new VideoSignalReader(VIDEO_SIGNAL_FILE_PATH_SNIP);
         VideoSignal videoSignal = videoSignalReader.readVideoSignal();
 
-
-        assertThat(videoSignal.getCycle()).isEqualTo(240);
         assertThat(videoSignal.getXRegister()).isEqualTo(37);
         //Ergebnis 15260
     }
