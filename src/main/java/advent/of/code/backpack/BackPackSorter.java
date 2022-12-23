@@ -9,24 +9,24 @@ public class BackPackSorter {
         initMap();
     }
 
+    public int getSharedItem(String inputString) throws Exception {
+        String firstItemStorage = getFirstItemStorage(inputString);
+        String secondItemStorage = getSecondItemStorage(inputString);
+        for (int index = 0; index < firstItemStorage.length(); index++) {
+            String substring = firstItemStorage.substring(index, index + 1);
+            if (secondItemStorage.contains(substring)) {
+                return alphabetMap.get(substring.charAt(0));
+            }
+        }
+        throw new Exception("No double letter found");
+    }
+
     private String getFirstItemStorage(String inputString) {
         return inputString.substring(0, inputString.length() / 2);
     }
 
     private String getSecondItemStorage(String inputString) {
         return inputString.substring(inputString.length() / 2);
-    }
-
-    public int getSharedItem(String inputString) throws Exception {
-        String firstItemStorage = getFirstItemStorage(inputString);
-        String secondItemStorage = getSecondItemStorage(inputString);
-        for (int i = 0; i < firstItemStorage.length(); i++) {
-            String substring = firstItemStorage.substring(i, i + 1);
-            if (secondItemStorage.contains(substring)) {
-                return alphabetMap.get(substring.charAt(0));
-            }
-        }
-        throw new Exception("No double letter found");
     }
 
     public int getSharedItemGroup(String firstLine, String secondLine, String thirdLine) throws Exception {
