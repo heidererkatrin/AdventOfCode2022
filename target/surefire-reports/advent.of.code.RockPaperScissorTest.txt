@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: advent.of.code.RockPaperScissorTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.009 s <<< FAILURE! - in advent.of.code.RockPaperScissorTest
+runRockPaperScissorsReadCsvData  Time elapsed: 0 s  <<< ERROR!
+java.lang.StringIndexOutOfBoundsException: begin 0, end 1, length 0
+	at advent.of.code.RockPaperScissorTest.runRockPaperScissorsReadCsvData(RockPaperScissorTest.java:35)
+
