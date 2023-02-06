@@ -10,21 +10,23 @@ public class Encrypter {
         this.numbers = numbers;
     }
 
-    public String shuffleNumbers() {
-        List<NumberObject> copyOfNumberList = new ArrayList<>(numbers);
-        for (int i = 0; i < copyOfNumberList.size(); i++) {
+    public String shuffleNumbers(int numberOfShuffles) {
+        for (int shuffleAmount = 0; shuffleAmount< numberOfShuffles; shuffleAmount++) {
+            List<NumberObject> copyOfNumberList = new ArrayList<>(numbers);
+            for (int i = 0; i < copyOfNumberList.size(); i++) {
 
-            NumberObject numberObject = copyOfNumberList.get(i);
-            int newIndex = getCurrentIndex(numberObject) + numberObject.getValue();
+                NumberObject numberObject = copyOfNumberList.get(i);
+                int newIndex = getCurrentIndex(numberObject) + numberObject.getValue();
 
-            if (newIndex < 1) {
-                newIndex = calculateIndexNegativ(copyOfNumberList.size(), numberObject);
+                if (newIndex < 1) {
+                    newIndex = calculateIndexNegativ(copyOfNumberList.size(), numberObject);
 
-            } else if (newIndex > copyOfNumberList.size() - 1) {
-                newIndex = calculateIndexPositive(copyOfNumberList.size(), newIndex);
+                } else if (newIndex > copyOfNumberList.size() - 1) {
+                    newIndex = calculateIndexPositive(copyOfNumberList.size(), newIndex);
+                }
+                numbers.remove(numberObject);
+                numbers.add(newIndex, numberObject);
             }
-            numbers.remove(numberObject);
-            numbers.add(newIndex, numberObject);
         }
         return buildStringFromList(numbers);
     }
@@ -39,9 +41,18 @@ public class Encrypter {
 
     public int getThreeHighestNumbers(){
         NumberObject zero = numbers.stream().filter(e -> e.getValue().equals(0)).findFirst().get();
-        int sum = getItemAtIndex(getCurrentIndex(zero) + 1000).getValue();
-        sum = sum + getItemAtIndex(getCurrentIndex(zero) + 2000).getValue();
-        sum = sum + getItemAtIndex(getCurrentIndex(zero) + 3000).getValue();
+        if (getCurrentIndex(zero) + 1000 > 5000){
+            return getSum(getCurrentIndex(zero) + 1000 - 5000, getCurrentIndex(zero) + 2000 - 5000, getCurrentIndex(zero) + 3000 - 5000);
+        }
+        else{
+            return  getSum(getCurrentIndex(zero) + 1000, getCurrentIndex(zero) + 2000, getCurrentIndex(zero) + 3000);
+        }
+    }
+
+    private int getSum(int zero, int zero1, int zero2) {
+        int sum = getItemAtIndex(zero).getValue();
+        sum = sum + getItemAtIndex(zero1).getValue();
+        sum = sum + getItemAtIndex(zero2).getValue();
         return sum;
     }
 
@@ -64,6 +75,10 @@ public class Encrypter {
 
     public void addNumberToList(String number) {
         numbers.add(new NumberObject(Integer.parseInt(number.trim())));
+    }
+
+    public void addNumberToList(Integer number) {
+        numbers.add(new NumberObject(number));
     }
 
     private String buildStringFromList(List<NumberObject> numbers) {

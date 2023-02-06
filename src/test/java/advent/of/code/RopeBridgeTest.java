@@ -1,10 +1,12 @@
 package advent.of.code;
 
+import advent.of.code.ropeBridge.RopeBridge;
 import advent.of.code.ropeBridge.RopeBridgeCsvReader;
 import advent.of.code.ropeBridge.RopeBridgeGrid;
 import advent.of.code.ropeBridge.StepInformation;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +32,14 @@ public class RopeBridgeTest {
         RopeBridgeGrid grid = gridCsvReader.readInput(TREE_GRID_FILE_PATH_SNIP);
 
         assertThat(grid.getTailCount()).isEqualTo(13);
+    }
+
+    @Test
+    public void walkStepsInSnippet2() throws IOException {
+        RopeBridge gridCsvReader = new RopeBridge();
+        gridCsvReader.calculate(TREE_GRID_FILE_PATH_SNIP);
+
+//        assertThat(grid.getTailCount()).isEqualTo(13);
     }
 
     @Test

@@ -20,7 +20,7 @@ public class Day20Encrypter {
         encrypter.addNumberToList("-2");
         encrypter.addNumberToList("0");
         encrypter.addNumberToList("4");
-        String encryptedText = encrypter.shuffleNumbers();
+        String encryptedText = encrypter.shuffleNumbers(1);
 
         Assertions.assertEquals("1, 2, -3, 4, 0, 3, -2, ", encryptedText);
     }
@@ -34,7 +34,7 @@ public class Day20Encrypter {
         encrypter.addNumberToList("13");
         encrypter.addNumberToList("-10");
         encrypter.addNumberToList("2");
-        String encryptedText = encrypter.shuffleNumbers();
+        String encryptedText = encrypter.shuffleNumbers(1);
 
         Assertions.assertEquals("1, 13, 2, -10, ", encryptedText);
     }
@@ -45,8 +45,19 @@ public class Day20Encrypter {
         EncrypterCsvReader encrypterCsvReader = new EncrypterCsvReader();
 
         Encrypter encrypter = encrypterCsvReader.readInput(ENCRYPTION_FILE_PATH);
-        encrypter.shuffleNumbers();
+        encrypter.shuffleNumbers(1);
 
         Assertions.assertEquals(encrypter.getThreeHighestNumbers(), 7713);
+    }
+
+    @Test
+    void readCsvAndShuffleNumbersWithEncrypterKey() {
+        EncrypterCsvReader encrypterCsvReader = new EncrypterCsvReader();
+
+        Encrypter encrypter = encrypterCsvReader.readInputWithEncryptionKey(ENCRYPTION_FILE_PATH);
+        encrypter.shuffleNumbers(10);
+        //63938226 falsch -> too low
+
+        Assertions.assertEquals(encrypter.getThreeHighestNumbers(), 63938226);
     }
 }

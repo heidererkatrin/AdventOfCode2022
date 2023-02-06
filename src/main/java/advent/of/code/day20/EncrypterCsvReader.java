@@ -22,4 +22,18 @@ public class EncrypterCsvReader {
         }
         return encrypter;
     }
+
+    public Encrypter readInputWithEncryptionKey(String enyrptFilePAth) {
+        String line = "";
+        Encrypter encrypter = new Encrypter(new ArrayList<>());
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(enyrptFilePAth));
+            while ((line = br.readLine()) != null) {
+                encrypter.addNumberToList(Integer.parseInt(line.trim()) * 811589153);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encrypter;
+    }
 }
